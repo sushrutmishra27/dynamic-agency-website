@@ -1,0 +1,323 @@
+// Colors
+$color-primary: #5E60CE;
+$color-primary-light: #6930C3;
+$color-primary-dark: #5390D9;
+$color-secondary: #48BFE3;
+$color-secondary-light: #64DFDF;
+$color-secondary-dark: #56CFE1;
+$color-accent: #72EFDD;
+$color-accent-light: #80FFDB;
+$color-accent-dark: #5EEAD4;
+
+$color-text: #333333;
+$color-text-light: #666666;
+$color-text-lighter: #999999;
+$color-background: #FFFFFF;
+$color-background-alt: #F8F9FA;
+$color-background-dark: #212529;
+
+$color-success: #28A745;
+$color-warning: #FFC107;
+$color-danger: #DC3545;
+$color-info: #17A2B8;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $color-primary-light 0%, $color-primary 50%, $color-primary-dark 100%);
+$gradient-secondary: linear-gradient(135deg, $color-secondary-light 0%, $color-secondary 50%, $color-secondary-dark 100%);
+$gradient-accent: linear-gradient(135deg, $color-accent-light 0%, $color-accent 50%, $color-accent-dark 100%);
+
+// Typography
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+$font-family-heading: 'Clash Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+$font-family-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+$font-size-base: 1rem;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+$font-size-5xl: 3rem;
+$font-size-6xl: 3.75rem;
+$font-size-7xl: 4.5rem;
+$font-size-8xl: 6rem;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+$line-height-tight: 1.25;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-loose: 2;
+
+$letter-spacing-tighter: -0.05em;
+$letter-spacing-tight: -0.025em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.025em;
+$letter-spacing-wider: 0.05em;
+$letter-spacing-widest: 0.1em;
+
+// Spacing
+$spacing-0: 0;
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+$spacing-12: 3rem;
+$spacing-16: 4rem;
+$spacing-20: 5rem;
+$spacing-24: 6rem;
+$spacing-32: 8rem;
+$spacing-40: 10rem;
+$spacing-48: 12rem;
+$spacing-56: 14rem;
+$spacing-64: 16rem;
+$spacing-80: 20rem;
+$spacing-96: 24rem;
+
+// Borders
+$border-radius-none: 0;
+$border-radius-sm: 0.125rem;
+$border-radius-md: 0.25rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 0.75rem;
+$border-radius-2xl: 1rem;
+$border-radius-3xl: 1.5rem;
+$border-radius-full: 9999px;
+
+$border-width-none: 0;
+$border-width-thin: 1px;
+$border-width-thick: 2px;
+$border-width-thicker: 4px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+$shadow-outline: 0 0 0 3px rgba(66, 153, 225, 0.5);
+$shadow-none: none;
+
+// Z-index
+$z-index-0: 0;
+$z-index-10: 10;
+$z-index-20: 20;
+$z-index-30: 30;
+$z-index-40: 40;
+$z-index-50: 50;
+$z-index-auto: auto;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Transitions
+$transition-fast: 150ms;
+$transition-normal: 300ms;
+$transition-slow: 500ms;
+$transition-slower: 1000ms;
+
+$transition-ease-in: cubic-bezier(0.4, 0, 1, 1);
+$transition-ease-out: cubic-bezier(0, 0, 0.2, 1);
+$transition-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Animation
+$animation-spin: spin 1s linear infinite;
+$animation-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+$animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+$animation-bounce: bounce 1s infinite;
+
+// Container
+$container-padding: 1rem;
+$container-max-width-sm: 640px;
+$container-max-width-md: 768px;
+$container-max-width-lg: 1024px;
+$container-max-width-xl: 1280px;
+$container-max-width-2xl: 1536px;
+
+// Grid
+$grid-cols-1: repeat(1, minmax(0, 1fr));
+$grid-cols-2: repeat(2, minmax(0, 1fr));
+$grid-cols-3: repeat(3, minmax(0, 1fr));
+$grid-cols-4: repeat(4, minmax(0, 1fr));
+$grid-cols-5: repeat(5, minmax(0, 1fr));
+$grid-cols-6: repeat(6, minmax(0, 1fr));
+$grid-cols-7: repeat(7, minmax(0, 1fr));
+$grid-cols-8: repeat(8, minmax(0, 1fr));
+$grid-cols-9: repeat(9, minmax(0, 1fr));
+$grid-cols-10: repeat(10, minmax(0, 1fr));
+$grid-cols-11: repeat(11, minmax(0, 1fr));
+$grid-cols-12: repeat(12, minmax(0, 1fr));
+$grid-cols-none: none;
+
+$grid-rows-1: repeat(1, minmax(0, 1fr));
+$grid-rows-2: repeat(2, minmax(0, 1fr));
+$grid-rows-3: repeat(3, minmax(0, 1fr));
+$grid-rows-4: repeat(4, minmax(0, 1fr));
+$grid-rows-5: repeat(5, minmax(0, 1fr));
+$grid-rows-6: repeat(6, minmax(0, 1fr));
+$grid-rows-none: none;
+
+// Custom properties
+:root {
+  // Colors
+  --color-primary: #{$color-primary};
+  --color-primary-light: #{$color-primary-light};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-secondary: #{$color-secondary};
+  --color-secondary-light: #{$color-secondary-light};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-accent: #{$color-accent};
+  --color-accent-light: #{$color-accent-light};
+  --color-accent-dark: #{$color-accent-dark};
+
+  --color-text: #{$color-text};
+  --color-text-light: #{$color-text-light};
+  --color-text-lighter: #{$color-text-lighter};
+  --color-background: #{$color-background};
+  --color-background-alt: #{$color-background-alt};
+  --color-background-dark: #{$color-background-dark};
+
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-danger: #{$color-danger};
+  --color-info: #{$color-info};
+
+  // Gradients
+  --gradient-primary: #{$gradient-primary};
+  --gradient-secondary: #{$gradient-secondary};
+  --gradient-accent: #{$gradient-accent};
+
+  // Typography
+  --font-family-base: #{$font-family-base};
+  --font-family-heading: #{$font-family-heading};
+  --font-family-mono: #{$font-family-mono};
+
+  --font-size-base: #{$font-size-base};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-size-5xl: #{$font-size-5xl};
+  --font-size-6xl: #{$font-size-6xl};
+  --font-size-7xl: #{$font-size-7xl};
+  --font-size-8xl: #{$font-size-8xl};
+
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  --font-weight-extrabold: #{$font-weight-extrabold};
+  --font-weight-black: #{$font-weight-black};
+
+  --line-height-tight: #{$line-height-tight};
+  --line-height-snug: #{$line-height-snug};
+  --line-height-normal: #{$line-height-normal};
+  --line-height-relaxed: #{$line-height-relaxed};
+  --line-height-loose: #{$line-height-loose};
+
+  --letter-spacing-tighter: #{$letter-spacing-tighter};
+  --letter-spacing-tight: #{$letter-spacing-tight};
+  --letter-spacing-normal: #{$letter-spacing-normal};
+  --letter-spacing-wide: #{$letter-spacing-wide};
+  --letter-spacing-wider: #{$letter-spacing-wider};
+  --letter-spacing-widest: #{$letter-spacing-widest};
+
+  // Spacing
+  --spacing-0: #{$spacing-0};
+  --spacing-1: #{$spacing-1};
+  --spacing-2: #{$spacing-2};
+  --spacing-3: #{$spacing-3};
+  --spacing-4: #{$spacing-4};
+  --spacing-5: #{$spacing-5};
+  --spacing-6: #{$spacing-6};
+  --spacing-8: #{$spacing-8};
+  --spacing-10: #{$spacing-10};
+  --spacing-12: #{$spacing-12};
+  --spacing-16: #{$spacing-16};
+  --spacing-20: #{$spacing-20};
+  --spacing-24: #{$spacing-24};
+  --spacing-32: #{$spacing-32};
+  --spacing-40: #{$spacing-40};
+  --spacing-48: #{$spacing-48};
+  --spacing-56: #{$spacing-56};
+  --spacing-64: #{$spacing-64};
+  --spacing-80: #{$spacing-80};
+  --spacing-96: #{$spacing-96};
+
+  // Borders
+  --border-radius-none: #{$border-radius-none};
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-2xl: #{$border-radius-2xl};
+  --border-radius-3xl: #{$border-radius-3xl};
+  --border-radius-full: #{$border-radius-full};
+
+  --border-width-none: #{$border-width-none};
+  --border-width-thin: #{$border-width-thin};
+  --border-width-thick: #{$border-width-thick};
+  --border-width-thicker: #{$border-width-thicker};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+  --shadow-2xl: #{$shadow-2xl};
+  --shadow-inner: #{$shadow-inner};
+  --shadow-outline: #{$shadow-outline};
+  --shadow-none: #{$shadow-none};
+
+  // Z-index
+  --z-index-0: #{$z-index-0};
+  --z-index-10: #{$z-index-10};
+  --z-index-20: #{$z-index-20};
+  --z-index-30: #{$z-index-30};
+  --z-index-40: #{$z-index-40};
+  --z-index-50: #{$z-index-50};
+  --z-index-auto: #{$z-index-auto};
+
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-normal: #{$transition-normal};
+  --transition-slow: #{$transition-slow};
+  --transition-slower: #{$transition-slower};
+
+  --transition-ease-in: #{$transition-ease-in};
+  --transition-ease-out: #{$transition-ease-out};
+  --transition-ease-in-out: #{$transition-ease-in-out};
+
+  // Container
+  --container-padding: #{$container-padding};
+  --container-max-width-sm: #{$container-max-width-sm};
+  --container-max-width-md: #{$container-max-width-md};
+  --container-max-width-lg: #{$container-max-width-lg};
+  --container-max-width-xl: #{$container-max-width-xl};
+  --container-max-width-2xl: #{$container-max-width-2xl};
+}

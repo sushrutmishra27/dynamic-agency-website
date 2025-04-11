@@ -40,6 +40,8 @@ Thumbs.db
 # Cache directories
 .npm
 .eslintcache
+.code_planner_cache.db
+change_applier_cache.db
 
 # Optional REPL history
 .node_repl_history
@@ -50,3 +52,9 @@ coverage/
 # Temporary files
 tmp/
 temp/
+
+# Backup files
+*.bak
+
+# Preview files
+preview.html

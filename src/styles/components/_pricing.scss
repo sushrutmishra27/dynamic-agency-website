@@ -1,0 +1,102 @@
+.pricing-section {
+  background-color: var(--color-background);
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .pricing-card {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: transform var(--transition-normal) var(--transition-ease-in-out),
+                box-shadow var(--transition-normal) var(--transition-ease-in-out);
+    
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    &--featured {
+      position: relative;
+      border: 2px solid var(--color-primary);
+      transform: scale(1.05);
+      
+      &:hover {
+        transform: scale(1.05) translateY(-10px);
+      }
+      
+      .pricing-card__badge {
+        position: absolute;
+        top: 0;
+        right: var(--spacing-6);
+        background: var(--color-primary);
+        color: white;
+        padding: var(--spacing-1) var(--spacing-3);
+        border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-bold);
+      }
+    }
+    
+    &__name {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-2);
+    }
+    
+    &__description {
+      color: var(--color-text-light);
+      margin-bottom: var(--spacing-6);
+    }
+    
+    &__price {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-2);
+      color: var(--color-primary);
+    }
+    
+    &__period {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-bottom: var(--spacing-6);
+    }
+    
+    &__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--spacing-6);
+    }
+    
+    &__feature {
+      padding: var(--spacing-2) 0;
+      border-bottom: 1px solid var(--color-background-alt);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      &--included {
+        opacity: 1;
+      }
+      
+      &--excluded {
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+    }
+  }
+}

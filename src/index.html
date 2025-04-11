@@ -3,22 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Agency | Creative Solutions</title>
+    <meta name="description" content="Transform your business with our innovative digital marketing solutions. Expert services in SEO, brand design, and digital strategy.">
+    <meta name="keywords" content="digital marketing, SEO, brand design, marketing agency, creative solutions">
+    <title>Leading Digital Marketing Agency | Creative Solutions for Business Growth</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/animations.css">
     <script src="scripts/main.js" defer></script>
+    <script src="scripts/faq.js" defer></script>
+    <script src="scripts/animations.js" defer></script>
 </head>
-<body>
+<body data-scroll-container>
+    <div class="hero-background">
+        <canvas id="hero-canvas"></canvas>
+    </div>
     <header class="header">
-        <div class="container">
-            <div class="logo">
+        <div class="container stagger-container">
+            <div class="logo stagger-item fade-in">
                 <h1>AgencyName</h1>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav stagger-item">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -26,11 +35,13 @@
     </header>
 
     <main>
-        <section id="hero" class="hero">
+        <section id="hero" class="hero gradient-bg">
             <div class="container">
-                <h2>Transform Your Brand with Dynamic Marketing</h2>
-                <p>We create cutting-edge digital experiences that drive results</p>
-                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <div class="animated-text-container">
+                    <h2 class="animate-in">Transform Your Brand with Dynamic Marketing</h2>
+                    <p class="animate-in-delay">We create cutting-edge digital experiences that drive results</p>
+                    <a href="#contact" class="btn btn-primary animate-in-delay-2">Get Started</a>
+                </div>
             </div>
         </section>
 
@@ -38,7 +49,44 @@
             <div class="container">
                 <h2>Our Services</h2>
                 <div class="services-grid">
-                    <!-- Service items will be dynamically loaded -->
+                    <div class="service-card">
+                        <i class="fas fa-digital"></i>
+                        <h3>Digital Marketing</h3>
+                        <p>Strategic online marketing solutions</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-brush"></i>
+                        <h3>Brand Design</h3>
+                        <p>Creative brand identity development</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>SEO Optimization</h3>
+                        <p>Data-driven search optimization</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="container">
+                <h2>Our Process</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <h3>Discovery</h3>
+                        <p>Understanding your goals and vision</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <h3>Strategy</h3>
+                        <p>Developing targeted action plans</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <h3>Execution</h3>
+                        <p>Implementing solutions with precision</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,15 +95,142 @@
             <div class="container">
                 <h2>Our Work</h2>
                 <div class="portfolio-grid">
-                    <!-- Portfolio items will be dynamically loaded -->
+                    <div class="portfolio-item">
+                        <img src="images/project1.jpg" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <h3>Brand Redesign</h3>
+                            <p>Complete brand transformation for tech startup</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="images/project2.jpg" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <h3>Digital Campaign</h3>
+                            <p>Multi-channel marketing campaign</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="images/project3.jpg" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <h3>SEO Success</h3>
+                            <p>300% traffic increase in 6 months</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
+
+        <section id="pricing" class="pricing">
+        <div class="container">
+        <h2>Pricing Plans</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">$499/mo</div>
+                <ul class="features">
+                    <li>Basic Digital Marketing</li>
+                    <li>Social Media Management</li>
+                    <li>Monthly Reports</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Professional</h3>
+                <div class="price">$999/mo</div>
+                <ul class="features">
+                    <li>Advanced Digital Marketing</li>
+                    <li>Content Creation</li>
+                    <li>SEO Optimization</li>
+                    <li>Weekly Reports</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">Custom</div>
+                <ul class="features">
+                    <li>Full-Service Marketing</li>
+                    <li>Brand Strategy</li>
+                    <li>Dedicated Manager</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <a href="#contact" class="btn">Contact Us</a>
+            </div>
+        </div>
+        </div>
+        </section>
+        </main>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">What services do you offer?</div>
+                    <div class="faq-answer">We provide comprehensive digital marketing, brand design, and SEO optimization services tailored to your business needs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does it take to see results?</div>
+                    <div class="faq-answer">Results vary by service, but most clients see initial improvements within 3-6 months of consistent strategy implementation.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer custom solutions?</div>
+                    <div class="faq-answer">Yes, we create personalized marketing strategies based on your specific goals and industry requirements.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Client Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"Their strategic approach transformed our online presence completely. Exceptional results!"</p>
+                    <div class="client-info">
+                        <strong>Jane Smith</strong>
+                        <span>CEO, Tech Solutions</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Professional team that delivers outstanding creative solutions. Highly recommended!"</p>
+                    <div class="client-info">
+                        <strong>John Davis</strong>
+                        <span>Marketing Director, Global Corp</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Marketing Agency. All rights reserved.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>We're a creative marketing agency dedicated to helping businesses grow through innovative digital solutions.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Our Process</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>Email: info@agency.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Marketing St, Digital City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Marketing Agency. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 </body>
