@@ -1,343 +1,218 @@
 /**
- * Animation utilities using GSAP
+ * Animation utility functions for the application
  */
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-// Import these plugins only if you have the Club GreenSock membership
-// import { SplitText } from 'gsap/SplitText';
-// import { CustomEase } from 'gsap/CustomEase';
-// import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+import { select, selectAll } from './dom';
 
 // Register GSAP plugins
-gsap.registerPlugin(
-  ScrollTrigger,
-  ScrollToPlugin
-  // SplitText,
-  // CustomEase,
-  // DrawSVGPlugin
-);
-
-// Custom eases - uncomment if you have CustomEase plugin
-// CustomEase.create('custom-bounce', 'M0,0 C0.2,0 0.1,1 0.5,1 0.9,1 0.6,0 1,0');
-// CustomEase.create('custom-expo', 'M0,0 C0.05,0 0.133,1 1,1');
-// CustomEase.create('custom-circ', 'M0,0 C0.5,0 0.5,1 1,1');
+gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Initialize GSAP and ScrollTrigger
+ * Initialize GSAP
  */
-export const initGSAP = () => {
-  // Set defaults
+export function initGSAP() {
+  // Default easing
   gsap.defaults({
     ease: 'power3.out',
-    duration: 1,
-    overwrite: 'auto',
-    lazy: true,
-    immediateRender: false
+    duration: 1
+  });
+}
+
+/**
+ * Create scroll progress indicator
+ * @param {HTMLElement} element - The element to use as the progress indicator
+ * @param {Object} options - Options for the progress indicator
+ * @param {string} options.direction - Direction of the progress indicator (horizontal or vertical)
+ * @param {string} options.color - Color of the progress indicator
+ */
+export function createScrollProgress(element, options = {}) {
+  const { direction = 'horizontal', color = 'var(--color-primary)' } = options;
+  
+  // Set initial styles
+  gsap.set(element, {
+    position: 'fixed',
+    top: direction === 'horizontal' ? 0 : 'auto',
+    left: direction === 'vertical' ? 0 : 'auto',
+    bottom: direction === 'vertical' ? 'auto' : 0,
+    right: 'auto',
+    width: direction === 'horizontal' ? 0 : '4px',
+    height: direction === 'vertical' ? 0 : '4px',
+    backgroundColor: color,
+    zIndex: 9999
   });
   
-  // Set ScrollTrigger defaults
-  ScrollTrigger.defaults({
-    markers: false, // Set to true for debugging
-    start: 'top bottom',
-    end: 'bottom top',
-    toggleActions: 'play none none reverse',
+  // Create scroll trigger
+  ScrollTrigger.create({
+    start: 'top top',
+    end: 'bottom bottom',
+    onUpdate: (self) => {
+      if (direction === 'horizontal') {
+        gsap.to(element, {
+          width: `${self.progress * 100}%`,
+          duration: 0.1,
+          ease: 'none'
+        });
+      } else {
+        gsap.to(element, {
+          height: `${self.progress * 100}%`,
+          duration: 0.1,
+          ease: 'none'
+        });
+      }
+    }
   });
-  
-  // Clear ScrollTrigger on page refresh
-  ScrollTrigger.clearMatchMedia();
-  
-  // Add refresh on resize
-  window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
-  });
-};
+}
 
 /**
  * Animate fade in
- * @param {string|Element} element - Element selector or element
+ * @param {HTMLElement} element - The element to animate
  * @param {Object} options - Animation options
- * @returns {Object} Animation timeline
  */
-export const animateFadeIn = (element, options = {}) => {
+export function animateFadeIn(element, options = {}) {
   const {
+    y = 30,
     duration = 1,
-    ease = 'power2.out',
     delay = 0,
-    from = { opacity: 0, y: 20 },
     stagger = 0,
-    scrollTrigger = null,
+    scrollTrigger = null
   } = options;
   
-  const elements = typeof element === 'string' ? document.querySelectorAll(element) : [element];
-  const timeline = gsap.timeline({
-    delay,
-    scrollTrigger,
-  });
-  
-  // Set initial state
-  gsap.set(elements, from);
-  
-  // Animate
-  timeline.to(elements, {
-    opacity: 1,
-    y: 0,
+  const animation = {
+    opacity: 0,
+    y,
     duration,
     stagger,
-    ease,
-  });
-  
-  return timeline;
-};
-
-/**
- * Create a scroll-based animation
- * @param {string|Element} element - Element selector or element
- * @param {Object} options - Animation options
- * @returns {Object} ScrollTrigger instance
- */
-export const createScrollAnimation = (element, options = {}) => {
-  const {
-    animation,
-    trigger = element,
-    start = 'top bottom',
-    end = 'bottom top',
-    scrub = false,
-    pin = false,
-    pinSpacing = true,
-    markers = false,
-    toggleActions = 'play none none reverse',
-    onEnter = null,
-    onLeave = null,
-    onEnterBack = null,
-    onLeaveBack = null,
-  } = options;
-  
-  return ScrollTrigger.create({
-    trigger: typeof trigger === 'string' ? document.querySelector(trigger) : trigger,
-    start,
-    end,
-    scrub,
-    pin,
-    pinSpacing,
-    markers,
-    toggleActions,
-    onEnter,
-    onLeave,
-    onEnterBack,
-    onLeaveBack,
-    animation,
-  });
-};
-
-/**
- * Create a scroll progress indicator
- * @param {string|Element} element - Element selector or element
- * @param {Object} options - Progress options
- * @returns {Object} Progress controller
- */
-export const createScrollProgress = (element, options = {}) => {
-  const {
-    direction = 'horizontal', // 'horizontal' or 'vertical'
-    ease = 'none',
-    color = '#000000',
-  } = options;
-  
-  const progressElement = typeof element === 'string' ? document.querySelector(element) : element;
-  
-  if (!progressElement) return;
-  
-  // Set initial styles
-  gsap.set(progressElement, {
-    [direction === 'horizontal' ? 'scaleX' : 'scaleY']: 0,
-    transformOrigin: direction === 'horizontal' ? 'left center' : 'center bottom',
-    backgroundColor: color,
-  });
-  
-  // Create scroll progress animation
-  const animation = gsap.to(progressElement, {
-    [direction === 'horizontal' ? 'scaleX' : 'scaleY']: 1,
-    ease,
-    scrollTrigger: {
-      trigger: document.documentElement,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: true,
-    },
-  });
-  
-  // Return controller
-  return {
-    animation,
-    update: () => {
-      ScrollTrigger.refresh();
-    },
-    setColor: (newColor) => {
-      progressElement.style.backgroundColor = newColor;
-    },
+    delay,
+    clearProps: 'transform'
   };
-};
-
-/**
- * Animate hero text with GSAP
- * @param {string|Element} element - Element selector or element
- * @param {Object} options - Animation options
- * @returns {Object} Animation timeline
- */
-export const animateHeroText = (element, options = {}) => {
-  const {
-    duration = 1.2,
-    stagger = 0.1,
-    ease = 'power3.out',
-    y = 50,
-    delay = 0
-  } = options;
-
-  const elements = typeof element === 'string' ? document.querySelectorAll(element) : [element];
   
-  return gsap.timeline({ delay })
-    .from(elements, {
-      opacity: 0,
-      y,
-      duration,
-      stagger,
-      ease
-    });
-};
+  if (scrollTrigger) {
+    animation.scrollTrigger = {
+      trigger: scrollTrigger.trigger || element,
+      start: scrollTrigger.start || 'top 80%',
+      toggleActions: scrollTrigger.toggleActions || 'play none none none',
+      ...scrollTrigger
+    };
+  }
+  
+  return gsap.from(element, animation);
+}
 
 /**
- * Create split text animation
- * @param {string|Element} element - Element selector or element
- * @param {Object} options - Animation options
- * @returns {Object} Animation timeline
+ * Create portfolio grid animation
+ * @param {HTMLElement} grid - The portfolio grid element
  */
-export const createTextSplitAnimation = (element, options = {}) => {
-  const {
-    type = 'chars',  // 'chars', 'words', or 'lines'
-    duration = 1,
-    stagger = 0.05,
-    ease = 'power2.out',
-    y = 30,
-    rotationX = 45,
-    opacity = 0,
-    delay = 0
-  } = options;
+export function createPortfolioGridAnimation(grid) {
+  if (!grid) return;
+  
+  const items = grid.querySelectorAll('.portfolio-item');
+  
+  ScrollTrigger.create({
+    trigger: grid,
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.from(items, {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+        clearProps: 'transform'
+      });
+    },
+    once: true
+  });
+}
 
-  const elements = typeof element === 'string' ? document.querySelectorAll(element) : [element];
-  const timeline = gsap.timeline({ delay });
-
-  elements.forEach(el => {
-    const splits = el.textContent.split(type === 'words' ? ' ' : '');
-    el.innerHTML = splits.map(item => `<span style="display: inline-block">${item}${type === 'words' ? ' ' : ''}</span>`).join('');
+/**
+ * Create testimonial carousel animation
+ * @param {HTMLElement} carousel - The carousel element
+ */
+export function createTestimonialCarouselAnimation(carousel) {
+  if (!carousel) return;
+  
+  const slides = carousel.querySelectorAll('.testimonial-slide');
+  
+  // Set initial state
+  gsap.set(slides, {
+    opacity: 0,
+    y: 30
+  });
+  
+  // Set first slide as active
+  if (slides.length > 0) {
+    slides[0].classList.add('active');
     
-    timeline.from(el.children, {
-      opacity,
-      y,
-      rotationX,
-      duration,
-      stagger,
-      ease
+    gsap.to(slides[0], {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out'
     });
-  });
-
-  return timeline;
-};
+  }
+}
 
 /**
- * Create hero section scroll animations
- * @param {string} heroSelector - Hero section selector
- * @param {Object} options - Animation options
- * @returns {Object} ScrollTrigger instance
+ * Create statistics counter animation
+ * @param {HTMLElement} container - The statistics container element
+ * @param {Array} statistics - The statistics data
  */
-export const createHeroScrollAnimations = (heroSelector, options = {}) => {
-  const {
-    parallaxElements = '.hero-parallax',
-    fadeElements = '.hero-fade',
-    speed = 1,
-    start = 'top top',
-    end = 'bottom top'
-  } = options;
-
-  const hero = document.querySelector(heroSelector);
-  if (!hero) return;
-
-  // Parallax effect
-  const parallaxItems = hero.querySelectorAll(parallaxElements);
-  parallaxItems.forEach(item => {
-    gsap.to(item, {
-      y: item.offsetHeight * speed,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start,
-        end,
-        scrub: true
-      }
-    });
+export function createStatisticsCounterAnimation(container, statistics) {
+  if (!container) return;
+  
+  const statItems = container.querySelectorAll('.statistic-value');
+  
+  ScrollTrigger.create({
+    trigger: container,
+    start: 'top 80%',
+    onEnter: () => {
+      statItems.forEach((item, index) => {
+        const value = parseInt(item.dataset.value, 10);
+        const prefix = item.dataset.prefix || '';
+        const suffix = item.dataset.suffix || '';
+        const duration = statistics[index]?.duration || 2;
+        
+        gsap.to(item, {
+          innerText: value,
+          duration,
+          ease: 'power2.out',
+          snap: { innerText: 1 },
+          onUpdate: () => {
+            item.innerHTML = `${prefix}${Math.floor(item.innerText)}${suffix}`;
+          }
+        });
+      });
+    },
+    once: true
   });
-
-  // Fade effect
-  const fadeItems = hero.querySelectorAll(fadeElements);
-  fadeItems.forEach(item => {
-    gsap.to(item, {
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start,
-        end,
-        scrub: true
-      }
-    });
-  });
-};
+}
 
 /**
- * Create hero scroll effects
- * @param {string} selector - Hero section selector
- * @param {Object} options - Effect options
- * @returns {Object} Animation controller
+ * Create team grid animation
+ * @param {HTMLElement} grid - The team grid element
  */
-export const createHeroScrollEffects = (selector, options = {}) => {
-  const {
-    scale = 1.1,
-    blur = 10,
-    opacity = 0.6,
-    pin = true,
-    scrub = true
-  } = options;
-
-  const hero = document.querySelector(selector);
-  if (!hero) return;
-
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: hero,
-      start: 'top top',
-      end: '+=100%',
-      pin,
-      scrub,
-      anticipatePin: 1
-    }
+export function createTeamGridAnimation(grid) {
+  if (!grid) return;
+  
+  const items = grid.querySelectorAll('.team-member');
+  
+  ScrollTrigger.create({
+    trigger: grid,
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.from(items, {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+        clearProps: 'transform'
+      });
+    },
+    once: true
   });
-
-  timeline
-    .to(hero, {
-      scale,
-      filter: `blur(${blur}px)`,
-      opacity,
-      ease: 'none'
-    });
-
-  return {
-    timeline,
-    update: () => ScrollTrigger.refresh(),
-    kill: () => timeline.kill()
-  };
-};
-
-/**
- * Export GSAP and plugins for direct use
- */
-export { gsap, ScrollTrigger, ScrollToPlugin };
+}

@@ -8,10 +8,7 @@
     <title>Leading Digital Marketing Agency | Creative Solutions for Business Growth</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles/animations.css">
     <script src="scripts/main.js" defer></script>
-    <script src="scripts/faq.js" defer></script>
-    <script src="scripts/animations.js" defer></script>
 </head>
 <body data-scroll-container>
     <div class="hero-background">
@@ -27,6 +24,8 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -38,28 +37,28 @@
         <section id="hero" class="hero gradient-bg">
             <div class="container">
                 <div class="animated-text-container">
-                    <h2 class="animate-in">Transform Your Brand with Dynamic Marketing</h2>
-                    <p class="animate-in-delay">We create cutting-edge digital experiences that drive results</p>
-                    <a href="#contact" class="btn btn-primary animate-in-delay-2">Get Started</a>
+                    <h2 class="animate-in hero-title">Transform Your Brand with Dynamic Marketing</h2>
+                    <p class="animate-in-delay hero-subtitle">We create cutting-edge digital experiences that drive results</p>
+                    <a href="#contact" class="btn btn-primary animate-in-delay-2 hero-cta">Get Started</a>
                 </div>
             </div>
         </section>
 
         <section id="services" class="services">
             <div class="container">
-                <h2>Our Services</h2>
+                <h2 class="section-title">Our Services</h2>
                 <div class="services-grid">
-                    <div class="service-card">
-                        <i class="fas fa-digital"></i>
+                    <div class="service-card stagger-item">
+                        <i class="fas fa-laptop-code"></i>
                         <h3>Digital Marketing</h3>
                         <p>Strategic online marketing solutions</p>
                     </div>
-                    <div class="service-card">
-                        <i class="fas fa-brush"></i>
+                    <div class="service-card stagger-item">
+                        <i class="fas fa-paint-brush"></i>
                         <h3>Brand Design</h3>
                         <p>Creative brand identity development</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card stagger-item">
                         <i class="fas fa-chart-line"></i>
                         <h3>SEO Optimization</h3>
                         <p>Data-driven search optimization</p>
@@ -70,7 +69,7 @@
 
         <section id="process" class="process">
             <div class="container">
-                <h2>Our Process</h2>
+                <h2 class="section-title">Our Process</h2>
                 <div class="process-steps">
                     <div class="step">
                         <span class="step-number">1</span>
@@ -91,38 +90,164 @@
             </div>
         </section>
 
+        <!-- Enhanced Portfolio Section -->
         <section id="portfolio" class="portfolio">
             <div class="container">
-                <h2>Our Work</h2>
+                <h2 class="section-title">Our Work</h2>
+                
+                <!-- Portfolio Filter Buttons -->
+                <div class="portfolio-filter">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="web-design">Web Design</button>
+                    <button class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+                    <button class="filter-btn" data-filter="branding">Branding</button>
+                    <button class="filter-btn" data-filter="marketing">Marketing</button>
+                </div>
+                
+                <!-- Portfolio Grid with 3D Cards -->
                 <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="images/project1.jpg" alt="Project 1">
-                        <div class="portfolio-overlay">
-                            <h3>Brand Redesign</h3>
-                            <p>Complete brand transformation for tech startup</p>
+                    <!-- Portfolio items will be dynamically loaded here -->
+                </div>
+                
+                <!-- View More Button -->
+                <div class="portfolio-more">
+                    <button class="btn btn-secondary">View More Projects</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Modal -->
+        <div class="case-study-modal" id="case-study-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-container">
+                <button class="modal-close">&times;</button>
+                <div class="modal-content">
+                    <div class="case-study-header">
+                        <h2 class="case-study-title"></h2>
+                        <div class="case-study-meta">
+                            <span class="case-study-client"></span>
+                            <span class="case-study-year"></span>
+                            <span class="case-study-category"></span>
                         </div>
                     </div>
-                    <div class="portfolio-item">
-                        <img src="images/project2.jpg" alt="Project 2">
-                        <div class="portfolio-overlay">
-                            <h3>Digital Campaign</h3>
-                            <p>Multi-channel marketing campaign</p>
+                    
+                    <div class="case-study-featured-image">
+                        <!-- Featured image will be loaded here -->
+                    </div>
+                    
+                    <div class="case-study-description"></div>
+                    
+                    <div class="case-study-details">
+                        <div class="case-study-challenge">
+                            <h3>Challenge</h3>
+                            <div class="challenge-content"></div>
+                        </div>
+                        
+                        <div class="case-study-solution">
+                            <h3>Solution</h3>
+                            <div class="solution-content"></div>
+                        </div>
+                        
+                        <div class="case-study-results">
+                            <h3>Results</h3>
+                            <ul class="results-list"></ul>
                         </div>
                     </div>
-                    <div class="portfolio-item">
-                        <img src="images/project3.jpg" alt="Project 3">
-                        <div class="portfolio-overlay">
-                            <h3>SEO Success</h3>
-                            <p>300% traffic increase in 6 months</p>
+                    
+                    <div class="case-study-gallery">
+                        <h3>Project Gallery</h3>
+                        <div class="gallery-container">
+                            <div class="gallery-main">
+                                <!-- Main gallery image will be displayed here -->
+                            </div>
+                            <div class="gallery-thumbnails">
+                                <!-- Gallery thumbnails will be loaded here -->
+                            </div>
                         </div>
                     </div>
+                    
+                    <div class="case-study-testimonial">
+                        <!-- Testimonial will be loaded here -->
+                    </div>
+                    
+                    <div class="case-study-technologies">
+                        <h3>Technologies Used</h3>
+                        <ul class="technologies-list"></ul>
+                    </div>
+                    
+                    <div class="case-study-cta">
+                        <a href="#contact" class="btn btn-primary">Start Your Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <section id="team" class="team">
+            <div class="container">
+                <h2 class="section-title">Meet Our Team</h2>
+                
+                <!-- Team Filter Buttons -->
+                <div class="team-filter">
+                    <button class="filter-btn active" data-filter="all">All Team</button>
+                    <button class="filter-btn" data-filter="creative">Creative</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                    <button class="filter-btn" data-filter="development">Development</button>
+                    <button class="filter-btn" data-filter="marketing">Marketing</button>
+                </div>
+                
+                <!-- Team Grid with 3D Cards -->
+                <div class="team-grid">
+                    <!-- Team members will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Member Modal -->
+        <div class="team-modal" id="team-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-container">
+                <button class="modal-close">&times;</button>
+                <div class="modal-content">
+                    <div class="team-member-header">
+                        <div class="team-member-image">
+                            <!-- Team member image will be loaded here -->
+                        </div>
+                        <div class="team-member-info">
+                            <h2 class="team-member-name"></h2>
+                            <h3 class="team-member-role"></h3>
+                            <div class="team-member-social">
+                                <!-- Social links will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member-bio"></div>
+                    
+                    <div class="team-member-quote"></div>
+                    
+                    <div class="team-member-expertise">
+                        <h3>Expertise</h3>
+                        <ul class="expertise-list"></ul>
+                    </div>
+                    
+                    <div class="team-member-education"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <section id="statistics" class="statistics">
+            <div class="container">
+                <div class="statistics-grid">
+                    <!-- Statistics will be dynamically loaded here -->
                 </div>
             </div>
         </section>
 
         <section id="pricing" class="pricing">
         <div class="container">
-        <h2>Pricing Plans</h2>
+        <h2 class="section-title">Pricing Plans</h2>
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3>Starter</h3>
@@ -163,7 +288,7 @@
 
     <section id="faq" class="faq">
         <div class="container">
-            <h2>Frequently Asked Questions</h2>
+            <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">
                     <div class="faq-question">What services do you offer?</div>
@@ -181,23 +306,31 @@
         </div>
     </section>
 
+    <!-- Enhanced Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="container">
-            <h2>Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"Their strategic approach transformed our online presence completely. Exceptional results!"</p>
-                    <div class="client-info">
-                        <strong>Jane Smith</strong>
-                        <span>CEO, Tech Solutions</span>
-                    </div>
+            <h2 class="section-title">Client Testimonials</h2>
+            
+            <!-- Testimonial Carousel -->
+            <div class="testimonial-carousel">
+                <div class="carousel-container">
+                    <!-- Testimonial slides will be dynamically loaded here -->
                 </div>
-                <div class="testimonial-card">
-                    <p>"Professional team that delivers outstanding creative solutions. Highly recommended!"</p>
-                    <div class="client-info">
-                        <strong>John Davis</strong>
-                        <span>Marketing Director, Global Corp</span>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="carousel-dots">
+                        <!-- Dots will be dynamically generated -->
                     </div>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Client Logo Showcase -->
+            <div class="clients-showcase">
+                <h3>Trusted By</h3>
+                <div class="clients-grid">
+                    <!-- Client logos will be dynamically loaded here -->
                 </div>
             </div>
         </div>
@@ -215,6 +348,9 @@
                     <ul>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#process">Our Process</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -233,5 +369,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loader">
+            <div class="loader-inner"></div>
+        </div>
+    </div>
 </body>
 </html>

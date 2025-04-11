@@ -12,6 +12,9 @@ import { isWebGLSupported } from './utils/three-utils';
 import { select, selectAll, hasTouch, getDeviceType, prefersReducedMotion } from './utils/dom';
 import { initGSAP, animateFadeIn, createScrollProgress } from './utils/animation-utils';
 import HeroBackground from './animations/HeroBackground';
+import { initPortfolioSection } from './components/Portfolio';
+import { initTestimonialsSection } from './components/Testimonials';
+import { initTeamSection } from './components/Team';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -43,9 +46,31 @@ function init() {
   // Initialize animations
   initAnimations();
   
+  // Initialize portfolio section
+  initPortfolioSection();
+  
+  // Initialize testimonials section
+  initTestimonialsSection();
+  
+  // Initialize team section
+  initTeamSection();
+  
   // Set loaded state
   state.isLoaded = true;
   document.documentElement.classList.add('is-loaded');
+  
+  // Hide loading overlay
+  const loadingOverlay = select('.loading-overlay');
+  if (loadingOverlay) {
+    gsap.to(loadingOverlay, {
+      opacity: 0,
+      duration: 0.5,
+      delay: 0.5,
+      onComplete: () => {
+        loadingOverlay.style.display = 'none';
+      }
+    });
+  }
   
   // Log initialization
   console.log(`Initialized application:
@@ -291,7 +316,7 @@ function initAnimations() {
 }
 
 /**
- * Initialize hero animations
+ * Initialize hero text animations
  */
 function initHeroTextAnimations() {
   const textElements = {
@@ -308,17 +333,10 @@ function initHeroTextAnimations() {
     defaults: { ease: 'power3.out' }
   });
 
-  // Split and animate title
-  const titleSplit = new SplitText(textElements.title, {
-    type: 'chars,words,lines'
-  });
-
   textTimeline
-    .from(titleSplit.chars, {
+    .from(textElements.title, {
       opacity: 0,
       y: 50,
-      rotationX: -90,
-      stagger: 0.02,
       duration: 1
     })
     .from(textElements.subtitle, {
@@ -343,12 +361,45 @@ function initHeroTextAnimations() {
 }
 
 function initHeroAnimations() {
-  const heroSection = select('.hero-section');
+  const heroSection = select('#hero');
   
   if (!heroSection) return;
 
-  // Initialize text animations
-  const textTimeline = initHeroTextAnimations();
+  // Initialize text animations for hero section
+  const heroTitle = select('.hero-title');
+  const heroSubtitle = select('.hero-subtitle');
+  const heroCta = select('.hero-cta');
+  
+  if (heroTitle) {
+    gsap.from(heroTitle, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: 'back.out',
+      delay: 0.5
+    });
+  }
+  
+  if (heroSubtitle) {
+    gsap.from(heroSubtitle, {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power2.out',
+      delay: 1.2
+    });
+  }
+  
+  if (heroCta) {
+    gsap.from(heroCta, {
+      scale: 0.8,
+      opacity: 0,
+      duration: 1,
+      ease: 'elastic.out(1, 0.5)',
+      delay: 1.8
+    });
+  }
+
   // Performance monitoring
   const perfMonitor = {
     fps: 0,
@@ -368,8 +419,8 @@ function initHeroAnimations() {
         // Auto-adjust quality if performance drops
         if (this.fps < 30) {
           state.reducedQuality = true;
-          if (heroSection._heroBackground) {
-            heroSection._heroBackground.setQuality('low');
+          if (window._heroBackground) {
+            window._heroBackground.setQuality('low');
           }
         }
       }
@@ -428,8 +479,9 @@ function initHeroAnimations() {
           particleDensity: breakpoints[bp].particles
         });
       });
+      
       // Store reference for cleanup
-      heroSection._heroBackground = heroBackground;
+      window._heroBackground = heroBackground;
 
       // Add scroll-triggered animations
       ScrollTrigger.create({
@@ -444,46 +496,6 @@ function initHeroAnimations() {
         scrub: true
       });
     }
-  }
-  
-  // Animate hero content
-  const heroTitle = select('.hero-title');
-  const heroSubtitle = select('.hero-subtitle');
-  const heroCta = select('.hero-cta');
-  
-  if (heroTitle) {
-    const splitTitle = new SplitText(heroTitle, { type: 'chars, words' });
-    gsap.from(splitTitle.chars, {
-      opacity: 0,
-      y: 50,
-      rotateX: -90,
-      stagger: 0.02,
-      duration: 1,
-      ease: 'back.out',
-      delay: 0.5
-    });
-  }
-  
-  if (heroSubtitle) {
-    const splitSubtitle = new SplitText(heroSubtitle, { type: 'words' });
-    gsap.from(splitSubtitle.words, {
-      opacity: 0,
-      y: 30,
-      stagger: 0.05,
-      duration: 0.8,
-      ease: 'power2.out',
-      delay: 1.2
-    });
-  }
-  
-  if (heroCta) {
-    gsap.from(heroCta, {
-      scale: 0.8,
-      opacity: 0,
-      duration: 1,
-      ease: 'elastic.out(1, 0.5)',
-      delay: 1.8
-    });
   }
 }
 

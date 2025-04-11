@@ -1,12 +1,12 @@
 import * as THREE from 'three';
-import { createScene, createAnimationLoop, createParticleSystem } from '../utils/three-utils';
+import { createParticleSystem } from '../utils/three-utils';
 
 /**
  * Hero Background Animation
  * A particle system that reacts to mouse movement
  */
 export class HeroBackground {
-  constructor(container) {
+  constructor(container, options = {}) {
     // Store container
     this.container = typeof container === 'string' ? document.querySelector(container) : container;
     
@@ -14,6 +14,13 @@ export class HeroBackground {
       console.error('Container not found');
       return;
     }
+    
+    // Store options
+    this.options = {
+      scale: options.scale || 1,
+      particleDensity: options.particleDensity || 1,
+      ...options
+    };
     
     // Initialize scene
     this.init();
@@ -25,72 +32,97 @@ export class HeroBackground {
     this.addEventListeners();
   }
   
-  createComplexParticleSystem() {
-    const geometry = new THREE.BufferGeometry();
-    const material = new THREE.ShaderMaterial({
-      vertexShader: this.getCustomVertexShader(),
-      fragmentShader: this.getCustomFragmentShader(),
-      uniforms: {
-        uTime: { value: 0 },
-        uColor: { value: new THREE.Color(0xffffff) },
-        uSize: { value: 2.0 }
-      },
-      transparent: true,
-      blending: THREE.AdditiveBlending
-    });
-    return new THREE.Points(geometry, material);
-  }
-
-  createFloatingLogo() {
-    const logoGeometry = new THREE.PlaneGeometry(20, 20);
-    const logoMaterial = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load('/path/to/logo.png'),
-      transparent: true,
-      opacity: 0.8
-    });
-    const logo = new THREE.Mesh(logoGeometry, logoMaterial);
-    logo.position.z = 10;
-    return logo;
-  }
-
   init() {
     // Create scene
-    const { scene, camera, renderer } = createScene({
-      container: this.container,
-      cameraPosition: [0, 0, 100],
-      backgroundColor: 0x000000,
-      alpha: true,
-      antialias: true,
-    });
+    this.scene = new THREE.Scene();
     
-    this.scene = scene;
-    this.camera = camera;
-    this.renderer = renderer;
+    // Create camera
+    this.camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    this.camera.position.z = 100;
+    
+    // Create renderer
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.container.querySelector('canvas'),
+      alpha: true,
+      antialias: true
+    });
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    if (!this.container.querySelector('canvas')) {
+      this.container.appendChild(this.renderer.domElement);
+    }
     
     // Create particle system
-    this.particles = createParticleSystem(this.scene, {
-      count: 1000,
-      size: { min: 0.2, max: 0.8 },
-      color: {
-        base: 0xffffff,
-        variation: 0x333333
-      },
-      maxDistance: 100,
-      customShader: {
-        vertex: this.getCustomVertexShader(),
-        fragment: this.getCustomFragmentShader()
-      },
-      opacity: { min: 0.4, max: 0.8 }
-    });
+    this.particles = this.createParticles();
+    this.scene.add(this.particles);
     
     // Set up mouse tracking
     this.mouse = new THREE.Vector2(0, 0);
-    
-    // Create animation loop
-    this.animationController = createAnimationLoop(() => this.animate());
+    this.mousePosition3D = new THREE.Vector3(0, 0, 0);
   }
   
-  animate() {
+  createParticles() {
+    // Calculate particle count based on density
+    const particleCount = Math.floor(1000 * this.options.particleDensity);
+    
+    // Create geometry
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+    const colors = new Float32Array(particleCount * 3);
+    
+    const color1 = new THREE.Color(0x4285f4);
+    const color2 = new THREE.Color(0x34a853);
+    const color3 = new THREE.Color(0xfbbc05);
+    const color4 = new THREE.Color(0xea4335);
+    const colorOptions = [color1, color2, color3, color4];
+    
+    const maxDistance = 100 * this.options.scale;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const i3 = i * 3;
+      
+      // Position
+      positions[i3] = (Math.random() - 0.5) * maxDistance * 2;
+      positions[i3 + 1] = (Math.random() - 0.5) * maxDistance * 2;
+      positions[i3 + 2] = (Math.random() - 0.5) * maxDistance * 2;
+      
+      // Size
+      sizes[i] = Math.random() * 2 + 0.5;
+      
+      // Color
+      const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+      colors[i3] = color.r;
+      colors[i3 + 1] = color.g;
+      colors[i3 + 2] = color.b;
+    }
+    
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    
+    // Create material
+    const material = new THREE.PointsMaterial({
+      size: 2,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.8,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    
+    // Create points
+    return new THREE.Points(geometry, material);
+  }
+  
+  animate = () => {
     const time = performance.now() * 0.001;
     
     // Dynamic rotation based on time
@@ -99,8 +131,6 @@ export class HeroBackground {
     
     // Update particle system with wave patterns
     const positions = this.particles.geometry.attributes.position;
-    const sizes = this.particles.geometry.attributes.size;
-    const colors = this.particles.geometry.attributes.color;
     
     for (let i = 0; i < positions.count; i++) {
       const i3 = i * 3;
@@ -130,7 +160,7 @@ export class HeroBackground {
       positions.array[i3 + 2] += (Math.random() - 0.5) * 0.1;
       
       // Keep particles within bounds
-      const maxDistance = 100;
+      const maxDistance = 100 * this.options.scale;
       if (Math.abs(positions.array[i3]) > maxDistance) {
         positions.array[i3] *= 0.95;
       }
@@ -146,17 +176,25 @@ export class HeroBackground {
     
     // Render scene
     this.renderer.render(this.scene, this.camera);
+    
+    // Continue animation loop
+    this.animationFrameId = requestAnimationFrame(this.animate);
   }
   
   startAnimation() {
-    this.animationController.start();
+    if (!this.animationFrameId) {
+      this.animate();
+    }
   }
   
   stopAnimation() {
-    this.animationController.stop();
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
   }
   
-  handleMouseMove(event) {
+  handleMouseMove = (event) => {
     // Convert mouse position to normalized device coordinates (-1 to +1)
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -174,7 +212,7 @@ export class HeroBackground {
     this.mousePosition3D = intersectionPoint;
   }
   
-  handleResize() {
+  handleResize = () => {
     // Update camera aspect ratio
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
@@ -185,13 +223,67 @@ export class HeroBackground {
   }
   
   addEventListeners() {
-    window.addEventListener('mousemove', this.handleMouseMove.bind(this));
-    window.addEventListener('resize', this.handleResize.bind(this));
+    window.addEventListener('mousemove', this.handleMouseMove);
+    window.addEventListener('resize', this.handleResize);
   }
   
   removeEventListeners() {
-    window.removeEventListener('mousemove', this.handleMouseMove.bind(this));
-    window.removeEventListener('resize', this.handleResize.bind(this));
+    window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('resize', this.handleResize);
+  }
+  
+  updateConfig(options) {
+    this.options = {
+      ...this.options,
+      ...options
+    };
+    
+    // Recreate particles with new options
+    this.scene.remove(this.particles);
+    this.particles.geometry.dispose();
+    this.particles.material.dispose();
+    
+    this.particles = this.createParticles();
+    this.scene.add(this.particles);
+  }
+  
+  updateParallax(progress) {
+    if (this.particles) {
+      // Move particles based on scroll progress
+      this.particles.position.y = progress * -50;
+      this.particles.rotation.x = progress * 0.5;
+    }
+  }
+  
+  show() {
+    gsap.to(this.particles.material, {
+      opacity: 0.8,
+      duration: 1
+    });
+  }
+  
+  hide() {
+    gsap.to(this.particles.material, {
+      opacity: 0,
+      duration: 1
+    });
+  }
+  
+  setQuality(quality) {
+    if (quality === 'low') {
+      // Reduce particle count
+      this.updateConfig({
+        particleDensity: 0.3
+      });
+    } else if (quality === 'medium') {
+      this.updateConfig({
+        particleDensity: 0.6
+      });
+    } else if (quality === 'high') {
+      this.updateConfig({
+        particleDensity: 1
+      });
+    }
   }
   
   destroy() {
