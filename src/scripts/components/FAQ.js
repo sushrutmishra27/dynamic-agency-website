@@ -8,10 +8,10 @@ import faqData from '../data/faq-data';
 
 class FAQ {
   constructor() {
-    this.faqSection = document.querySelector('#faq');
-    this.categoriesContainer = this.faqSection?.querySelector('.faq-categories');
-    this.searchInput = this.faqSection?.querySelector('.faq-search input');
-    this.accordionContainer = this.faqSection?.querySelector('.faq-accordion');
+    this.faqSection = document.querySelector('.faq-section');
+    this.categoriesContainer = this.faqSection?.querySelector('.faq-filters');
+    this.searchInput = this.faqSection?.querySelector('.faq-search-input');
+    this.accordionContainer = this.faqSection?.querySelector('.faq-items');
     this.activeCategory = 'all'; // Default active category
     this.activeAccordion = null; // Currently open accordion item
     
@@ -110,6 +110,7 @@ class FAQ {
           const category = button.getAttribute('data-category');
           if (category && category !== this.activeCategory) {
             this.filterByCategory(category);
+            this.updateURL(category);
           }
         });
       });
@@ -117,9 +118,9 @@ class FAQ {
     
     // Search input
     if (this.searchInput) {
-      this.searchInput.addEventListener('input', () => {
+      this.searchInput.addEventListener('input', debounce(() => {
         this.handleSearch();
-      });
+      }, 300));
     }
     
     // Accordion headers
@@ -204,7 +205,8 @@ class FAQ {
     // Filter questions by search term and category (if not 'all')
     const filteredQuestions = questions.filter(q => {
       const matchesSearch = q.question.toLowerCase().includes(searchTerm) || 
-                           q.answer.toLowerCase().includes(searchTerm);
+                           q.answer.toLowerCase().includes(searchTerm) ||
+                           q.tags?.some(tag => tag.toLowerCase().includes(searchTerm));
       const matchesCategory = this.activeCategory === 'all' || q.category === this.activeCategory;
       return matchesSearch && matchesCategory;
     });
@@ -307,9 +309,10 @@ class FAQ {
     
     // Animate open
     gsap.to(content, {
-      height: body.offsetHeight,
+      height: 'auto',
       duration: 0.4,
-      ease: 'power2.out'
+      ease: 'power2.out',
+      onComplete: () => gsap.set(content, { height: 'auto' })
     });
     
     // Animate icon
@@ -438,4 +441,8 @@ class FAQ {
   }
 }
 
-export default FAQ;
+export function initFAQSection() {
+  return new FAQ();
+}
+
+export default FAQ;;

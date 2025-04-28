@@ -509,4 +509,8 @@ class Contact {
   }
 }
 
+export function initContactSection() {
+  return new Contact();
+}
+
 export default Contact;

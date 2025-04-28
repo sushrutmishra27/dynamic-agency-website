@@ -246,65 +246,186 @@
         </section>
 
         <section id="pricing" class="pricing">
-        <div class="container">
-        <h2 class="section-title">Pricing Plans</h2>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$499/mo</div>
-                <ul class="features">
-                    <li>Basic Digital Marketing</li>
-                    <li>Social Media Management</li>
-                    <li>Monthly Reports</li>
-                </ul>
-                <a href="#contact" class="btn">Get Started</a>
-            </div>
-            <div class="pricing-card featured">
-                <h3>Professional</h3>
-                <div class="price">$999/mo</div>
-                <ul class="features">
-                    <li>Advanced Digital Marketing</li>
-                    <li>Content Creation</li>
-                    <li>SEO Optimization</li>
-                    <li>Weekly Reports</li>
-                </ul>
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-            </div>
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom</div>
-                <ul class="features">
-                    <li>Full-Service Marketing</li>
-                    <li>Brand Strategy</li>
-                    <li>Dedicated Manager</li>
-                    <li>24/7 Support</li>
-                </ul>
-                <a href="#contact" class="btn">Contact Us</a>
-            </div>
-        </div>
-        </div>
-        </section>
+                    <div class="container">
+                        <h2 class="section-title">Pricing Plans</h2>
+                        <div class="billing-toggle">
+                            <span class="monthly active">Monthly</span>
+                            <label class="switch">
+                                <input type="checkbox" id="billing-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="annually">Annually <span class="discount">Save 20%</span></span>
+                        </div>
+                        <div class="pricing-grid">
+                            <div class="pricing-card">
+                                <div class="card-header">
+                                    <h3>Starter</h3>
+                                    <div class="price-container">
+                                        <div class="price monthly">$499<span>/mo</span></div>
+                                        <div class="price annually">$399<span>/mo</span></div>
+                                    </div>
+                                    <p class="price-subtitle">Perfect for small businesses</p>
+                                </div>
+                                <ul class="features">
+                                    <li><i class="fas fa-check"></i>Basic Digital Marketing</li>
+                                    <li><i class="fas fa-check"></i>Social Media Management</li>
+                                    <li><i class="fas fa-check"></i>Monthly Reports</li>
+                                    <li><i class="fas fa-check"></i>Email Support</li>
+                                </ul>
+                                <div class="card-footer">
+                                    <a href="#contact" class="btn">Get Started</a>
+                                    <p class="guarantee">14-day money-back guarantee</p>
+                                </div>
+                            </div>
+                            <div class="pricing-card featured">
+                                <div class="popular-tag">Most Popular</div>
+                                <div class="card-header">
+                                    <h3>Professional</h3>
+                                    <div class="price-container">
+                                        <div class="price monthly">$999<span>/mo</span></div>
+                                        <div class="price annually">$799<span>/mo</span></div>
+                                    </div>
+                                    <p class="price-subtitle">Ideal for growing companies</p>
+                                </div>
+                                <ul class="features">
+                                    <li><i class="fas fa-check"></i>Advanced Digital Marketing</li>
+                                    <li><i class="fas fa-check"></i>Content Creation</li>
+                                    <li><i class="fas fa-check"></i>SEO Optimization</li>
+                                    <li><i class="fas fa-check"></i>Weekly Reports</li>
+                                    <li><i class="fas fa-check"></i>Priority Support</li>
+                                </ul>
+                                <div class="card-footer">
+                                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                                    <p class="guarantee">14-day money-back guarantee</p>
+                                </div>
+                            </div>
+                            <div class="pricing-card">
+                                <div class="card-header">
+                                    <h3>Enterprise</h3>
+                                    <div class="price-container">
+                                        <div class="price">Custom</div>
+                                    </div>
+                                    <p class="price-subtitle">For large organizations</p>
+                                </div>
+                                <ul class="features">
+                                    <li><i class="fas fa-check"></i>Full-Service Marketing</li>
+                                    <li><i class="fas fa-check"></i>Brand Strategy</li>
+                                    <li><i class="fas fa-check"></i>Dedicated Manager</li>
+                                    <li><i class="fas fa-check"></i>24/7 Support</li>
+                                    <li><i class="fas fa-check"></i>Custom Solutions</li>
+                                </ul>
+                                <div class="card-footer">
+                                    <a href="#contact" class="btn">Contact Us</a>
+                                    <p class="guarantee">Tailored to your needs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
         </main>
 
     <section id="faq" class="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">What services do you offer?</div>
-                    <div class="faq-answer">We provide comprehensive digital marketing, brand design, and SEO optimization services tailored to your business needs.</div>
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            
+                <!-- FAQ Search Bar -->
+                <div class="faq-search">
+                    <input type="text" id="faq-search" placeholder="Search FAQ...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">How long does it take to see results?</div>
-                    <div class="faq-answer">Results vary by service, but most clients see initial improvements within 3-6 months of consistent strategy implementation.</div>
+
+                <!-- FAQ Category Filter -->
+                <div class="faq-filter">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="services">Services</button>
+                    <button class="filter-btn" data-category="pricing">Pricing</button>
+                    <button class="filter-btn" data-category="process">Process</button>
+                    <button class="filter-btn" data-category="support">Support</button>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">Do you offer custom solutions?</div>
-                    <div class="faq-answer">Yes, we create personalized marketing strategies based on your specific goals and industry requirements.</div>
+
+                <div class="faq-grid">
+                    <div class="faq-item" data-category="services">
+                        <div class="faq-question">
+                            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            What services do you offer?
+                        </div>
+                        <div class="faq-answer">
+                            <p>We provide comprehensive digital marketing, brand design, and SEO optimization services tailored to your business needs.</p>
+                            <ul>
+                                <li>Digital Marketing Strategy</li>
+                                <li>Brand Identity Design</li>
+                                <li>SEO & Content Optimization</li>
+                                <li>Social Media Management</li>
+                                <li>PPC & Advertising</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="process">
+                        <div class="faq-question">
+                            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            How long does it take to see results?
+                        </div>
+                        <div class="faq-answer">
+                            <p>Results vary by service, but most clients see initial improvements within 3-6 months of consistent strategy implementation. We provide regular progress reports and analytics to track your growth.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="services">
+                        <div class="faq-question">
+                            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            Do you offer custom solutions?
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we create personalized marketing strategies based on your specific goals and industry requirements. Our process includes:</p>
+                            <ol>
+                                <li>Initial consultation and needs assessment</li>
+                                <li>Custom strategy development</li>
+                                <li>Implementation timeline</li>
+                                <li>Regular review and optimization</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="pricing">
+                        <div class="faq-question">
+                            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            What are your payment terms?
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer flexible payment options including monthly retainers and project-based pricing. All plans include:</p>
+                            <ul>
+                                <li>Monthly performance reports</li>
+                                <li>Dedicated account manager</li>
+                                <li>Regular strategy reviews</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="support">
+                        <div class="faq-question">
+                            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            What kind of support do you provide?
+                        </div>
+                        <div class="faq-answer">
+                            <p>We provide comprehensive support through multiple channels:</p>
+                            <ul>
+                                <li>24/7 emergency support</li>
+                                <li>Regular check-in meetings</li>
+                                <li>Dedicated project manager</li>
+                                <li>Training and resources</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Contact CTA -->
+                <div class="faq-cta">
+                    <p>Can't find what you're looking for?</p>
+                    <a href="#contact" class="btn btn-primary">Contact Us</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- Enhanced Testimonials Section -->
     <section id="testimonials" class="testimonials">
@@ -331,6 +452,71 @@
                 <h3>Trusted By</h3>
                 <div class="clients-grid">
                     <!-- Client logos will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Let's Start Your Project</h3>
+                    <p>Ready to transform your digital presence? Contact us today for a free consultation.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@agency.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Marketing St, Digital City</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone (Optional)">
+                        </div>
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected>Select Service</option>
+                                <option value="digital-marketing">Digital Marketing</option>
+                                <option value="brand-design">Brand Design</option>
+                                <option value="seo">SEO Optimization</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Join hundreds of satisfied clients who have achieved remarkable growth with our services.</p>
+                <div class="cta-buttons">
+                    <a href="#pricing" class="btn btn-primary">View Pricing</a>
+                    <a href="#portfolio" class="btn btn-secondary">See Our Work</a>
                 </div>
             </div>
         </div>

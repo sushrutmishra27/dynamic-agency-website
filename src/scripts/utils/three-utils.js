@@ -238,6 +238,133 @@ export function createTestimonialCard3D(element, options = {}) {
 }
 
 /**
+ * Create a 3D card effect for pricing cards
+ * @param {HTMLElement} element - The element to add the 3D effect to
+ * @param {Object} options - Options for the 3D effect
+ */
+export function createPricingCard3D(element, options = {}) {
+  if (!element || hasTouch()) return;
+  
+  const {
+    depth = 30,
+    rotationFactor = 0.5,
+    shadowIntensity = 0.4,
+    highlightColor = '#ffffff',
+    perspective = 800,
+    transitionDuration = 0.3
+  } = options;
+  
+  // Set perspective on parent
+  element.style.perspective = `${perspective}px`;
+  
+  // Get card elements
+  const card = element;
+  const header = element.querySelector('.card-header');
+  const price = element.querySelector('.price-container');
+  const features = element.querySelector('.features');
+  const footer = element.querySelector('.card-footer');
+  
+  // Set initial styles
+  card.style.transformStyle = 'preserve-3d';
+  card.style.transition = `transform ${transitionDuration}s ease-out, box-shadow ${transitionDuration}s ease-out`;
+  card.style.boxShadow = `0 10px 30px rgba(0, 0, 0, ${shadowIntensity / 2})`;
+  
+  if (header) {
+    header.style.transform = 'translateZ(0px)';
+    header.style.transition = `transform ${transitionDuration}s ease-out`;
+  }
+  
+  if (price) {
+    price.style.transform = 'translateZ(0px)';
+    price.style.transition = `transform ${transitionDuration}s ease-out`;
+  }
+  
+  if (features) {
+    features.style.transform = 'translateZ(0px)';
+    features.style.transition = `transform ${transitionDuration}s ease-out`;
+  }
+  
+  if (footer) {
+    footer.style.transform = 'translateZ(0px)';
+    footer.style.transition = `transform ${transitionDuration}s ease-out`;
+  }
+  
+  // Add mouse move event listener
+  element.addEventListener('mousemove', (e) => {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    
+    const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 10 * rotationFactor;
+    const rotateX = ((centerY - mouseY) / (rect.height / 2)) * 10 * rotationFactor;
+    
+    card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    card.style.boxShadow = `
+      0 ${15 + Math.abs(rotateX)}px ${30 + Math.abs(rotateX) * 2}px rgba(0, 0, 0, ${shadowIntensity}),
+      ${rotateY * -1}px ${rotateX * -1}px ${Math.abs(rotateY) + Math.abs(rotateX)}px rgba(${highlightColor.replace('#', '').match(/.{2}/g).map(h => parseInt(h, 16)).join(', ')}, 0.1)
+    `;
+    
+    if (header) {
+      header.style.transform = `translateZ(${depth}px)`;
+    }
+    
+    if (price) {
+      price.style.transform = `translateZ(${depth/1.5}px)`;
+    }
+    
+    if (features) {
+      features.style.transform = `translateZ(${depth/2}px)`;
+    }
+    
+    if (footer) {
+      footer.style.transform = `translateZ(${depth/1.2}px)`;
+    }
+  });
+  
+  // Add mouse leave event listener
+  element.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    card.style.boxShadow = `0 10px 30px rgba(0, 0, 0, ${shadowIntensity / 2})`;
+    
+    if (header) {
+      header.style.transform = 'translateZ(0px)';
+    }
+    
+    if (price) {
+      price.style.transform = 'translateZ(0px)';
+    }
+    
+    if (features) {
+      features.style.transform = 'translateZ(0px)';
+    }
+    
+    if (footer) {
+      footer.style.transform = 'translateZ(0px)';
+    }
+  });
+  
+  // Return object with cleanup method
+  return {
+    dispose: () => {
+      element.style.transform = '';
+      element.style.transformStyle = '';
+      element.style.transition = '';
+      element.style.boxShadow = '';
+      
+      if (header) header.style.transform = '';
+      if (price) price.style.transform = '';
+      if (features) features.style.transform = '';
+      if (footer) footer.style.transform = '';
+      
+      element.removeEventListener('mousemove', () => {});
+      element.removeEventListener('mouseleave', () => {});
+    }
+  };
+}
+
+/**
  * Create a 3D card effect for team member cards
  * @param {HTMLElement} element - The element to add the 3D effect to
  * @param {Object} options - Options for the 3D effect

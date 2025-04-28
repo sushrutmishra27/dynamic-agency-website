@@ -15,6 +15,9 @@ import HeroBackground from './animations/HeroBackground';
 import { initPortfolioSection } from './components/Portfolio';
 import { initTestimonialsSection } from './components/Testimonials';
 import { initTeamSection } from './components/Team';
+import initPricingSection from './components/Pricing';
+import initFAQSection from './components/FAQ';
+import initContactSection from './components/Contact';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -54,6 +57,23 @@ function init() {
   
   // Initialize team section
   initTeamSection();
+  
+  // Initialize pricing section with data
+  initPricingSection({
+    currency: 'USD',
+    plans: window.pricingPlans || []
+  });
+  
+  // Initialize FAQ section with data
+  initFAQSection({
+    questions: window.faqData || []
+  });
+  
+  // Initialize contact section with config
+  initContactSection({
+    endpoint: '/api/contact',
+    recaptcha: true
+  });
   
   // Set loaded state
   state.isLoaded = true;

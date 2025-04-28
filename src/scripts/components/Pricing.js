@@ -11,9 +11,9 @@ import pricingData from '../data/pricing-data';
 class Pricing {
   constructor() {
     this.pricingSection = document.querySelector('#pricing');
-    this.pricingContainer = this.pricingSection?.querySelector('.pricing-container');
-    this.toggleContainer = this.pricingSection?.querySelector('.pricing-toggle');
-    this.plansContainer = this.pricingSection?.querySelector('.pricing-plans');
+    this.pricingContainer = this.pricingSection?.querySelector('.pricing-grid');
+    this.toggleContainer = this.pricingSection?.querySelector('.billing-toggle');
+    this.plansContainer = this.pricingSection?.querySelector('.pricing-cards');
     this.currentBilling = 'monthly'; // Default billing period
     this.cards3D = []; // Store 3D card instances
     
@@ -150,6 +150,17 @@ class Pricing {
       toggleSwitch.addEventListener('click', () => {
         this.toggleBillingPeriod();
       });
+      
+      // Add keyboard accessibility
+      toggleSwitch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggleBillingPeriod();
+        }
+      });
+      toggleSwitch.setAttribute('role', 'switch');
+      toggleSwitch.setAttribute('tabindex', '0');
+      toggleSwitch.setAttribute('aria-checked', this.currentBilling === 'annual');
     }
     
     if (toggleLabels) {
@@ -223,20 +234,31 @@ class Pricing {
         const newPrice = this.currentBilling === 'monthly' ? plan.monthlyPrice : plan.annualPrice;
         const newPeriod = this.currentBilling === 'monthly' ? '/mo' : '/yr';
         
-        // Animate price change
-        gsap.to(amountElement, {
-          duration: 0.4,
-          y: -20,
+        // Animate price change with scale effect
+        const currentPrice = amountElement.textContent;
+        const tl = gsap.timeline();
+        
+        tl.to(amountElement, {
+          duration: 0.3,
+          scale: 0.85,
+          y: -10,
           opacity: 0,
-          ease: 'power2.in',
-          onComplete: () => {
-            amountElement.textContent = newPrice;
-            gsap.fromTo(amountElement, 
-              { y: 20, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }
-            );
-          }
-        });
+          ease: 'power2.in'
+        })
+        .call(() => {
+          amountElement.textContent = newPrice;
+        })
+        .fromTo(amountElement, 
+          { scale: 1.15, y: 10, opacity: 0 },
+          { scale: 1, y: 0, opacity: 1, duration: 0.4, ease: 'elastic.out(1, 0.75)' }
+        )
+        .to(planElement, {
+          duration: 0.4,
+          scale: 1.02,
+          yoyo: true,
+          repeat: 1,
+          ease: 'power2.inOut'
+        }, '<');
         
         // Update period
         periodElement.textContent = newPeriod;
@@ -311,6 +333,10 @@ class Pricing {
       });
     }
   }
+}
+
+export function initPricingSection() {
+  return new Pricing();
 }
 
 export default Pricing;

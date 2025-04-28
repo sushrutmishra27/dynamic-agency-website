@@ -55,13 +55,13 @@ const faqData = {
       id: 'faq-7',
       category: 'support',
       question: 'How often will we communicate about progress?',
-      answer: 'We provide monthly comprehensive reports and schedule regular check-in calls to discuss performance and strategy. Additionally, you'll have a dedicated account manager who is available for questions or concerns throughout the month. We believe in transparent, open communication with all our clients.'
+      answer: 'We provide monthly comprehensive reports and schedule regular check-in calls to discuss performance and strategy. Additionally, you will have a dedicated account manager who is available for questions or concerns throughout the month. We believe in transparent, open communication with all our clients.'
     },
     {
       id: 'faq-8',
       category: 'support',
-      question: 'What if I'm not satisfied with the results?',
-      answer: 'Client satisfaction is our priority. If you're not satisfied with the results, we'll work with you to understand your concerns and adjust our strategy accordingly. We offer a 30-day satisfaction guarantee for new clients. If you're not happy with our services within the first 30 days, we'll refund your investment.'
+      question: 'What if I am not satisfied with the results?',
+      answer: 'Client satisfaction is our priority. If you are not satisfied with the results, we will work with you to understand your concerns and adjust our strategy accordingly. We offer a 30-day satisfaction guarantee for new clients. If you are not happy with our services within the first 30 days, we will refund your investment.'
     },
     {
       id: 'faq-9',
@@ -73,7 +73,7 @@ const faqData = {
       id: 'faq-10',
       category: 'pricing',
       question: 'Are there any long-term contracts?',
-      answer: 'We offer both month-to-month services and annual contracts. Annual contracts come with a 20% discount on our standard rates. While we believe in the value of long-term partnerships for achieving sustainable results, we don't lock clients into lengthy commitments if that doesn't suit their needs.'
+      answer: 'We offer both month-to-month services and annual contracts. Annual contracts come with a 20% discount on our standard rates. While we believe in the value of long-term partnerships for achieving sustainable results, we do not lock clients into lengthy commitments if that does not suit their needs.'
     }
   ]
 };
