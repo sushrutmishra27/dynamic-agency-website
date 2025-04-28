@@ -1,5 +1,7 @@
 # Dynamic Marketing Agency Website
 
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/sushrutmishra27/dynamic-agency-website?utm_source=oss&utm_medium=github&utm_campaign=sushrutmishra27%2Fdynamic-agency-website&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 A cutting-edge marketing agency website featuring advanced 3D animations, interactive elements, and a modern design.
 
 ## Features
